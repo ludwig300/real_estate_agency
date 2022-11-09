@@ -1,10 +1,16 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Flat(models.Model):
     owner = models.CharField('ФИО владельца', max_length=200)
+    owner_pure_phone = PhoneNumberField(
+        region='RU',
+        verbose_name='Нормализованный номер телефона',
+        blank=True
+    )
     owners_phonenumber = models.CharField('Номер владельца', max_length=20)
     created_at = models.DateTimeField(
         'Когда создано объявление',
@@ -58,7 +64,8 @@ class Flat(models.Model):
         User,
         related_name="liked_posts",
         verbose_name='Кто лайкнул',
-        null=True
+        null=True,
+        blank=True
     )
 
     def __str__(self):
