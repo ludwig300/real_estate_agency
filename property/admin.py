@@ -4,7 +4,7 @@ from .models import Flat, Complaint, Owner
 
 
 class FlatAdmin(admin.ModelAdmin):
-    search_fields = ['town', 'owner', 'address', 'owner_pure_phone']
+    search_fields = ['town', 'owner_deprecated', 'address', 'owner_pure_phone']
     readonly_fields = ['created_at']
     list_display = (
         'owners_phonenumber',

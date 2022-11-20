@@ -5,7 +5,11 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Flat(models.Model):
-    owner = models.CharField('ФИО владельца', max_length=200)
+    owner_deprecated = models.CharField(
+        'ФИО владельца',
+        max_length=200,
+        blank=True
+    )
     owner_pure_phone = PhoneNumberField(
         region='RU',
         verbose_name='Нормализованный номер телефона',
@@ -17,7 +21,11 @@ class Flat(models.Model):
         default=timezone.now,
         db_index=True)
 
-    description = models.TextField('Текст объявления', blank=True)
+    description = models.TextField(
+        'Текст объявления',
+        blank=True,
+        db_index=True
+    )
     price = models.IntegerField('Цена квартиры', db_index=True)
 
     town = models.CharField(
@@ -28,14 +36,20 @@ class Flat(models.Model):
         'Район города, где находится квартира',
         max_length=50,
         blank=True,
-        help_text='Чертаново Южное')
+        help_text='Чертаново Южное',
+        db_index=True
+    )
     address = models.TextField(
         'Адрес квартиры',
-        help_text='ул. Подольских курсантов д.5 кв.4')
+        help_text='ул. Подольских курсантов д.5 кв.4',
+        db_index=True
+    )
     floor = models.CharField(
         'Этаж',
         max_length=3,
-        help_text='Первый этаж, последний этаж, пятый этаж')
+        help_text='Первый этаж, последний этаж, пятый этаж',
+        db_index=True
+    )
 
     rooms_number = models.IntegerField(
         'Количество комнат в квартире',
@@ -64,7 +78,8 @@ class Flat(models.Model):
         User,
         related_name="liked_posts",
         verbose_name='Кто лайкнул',
-        blank=True
+        blank=True,
+        db_index=True
     )
 
     def __str__(self):
@@ -89,14 +104,18 @@ class Complaint(models.Model):
 
 class Owner(models.Model):
     owner = models.CharField('ФИО владельца', max_length=200)
-    owners_phonenumber = models.CharField('Номер владельца', max_length=20)
+    owners_phonenumber = models.CharField(
+        'Номер владельца',
+        max_length=20,
+        db_index=True
+    )
     owner_pure_phone = PhoneNumberField(
-        region='RU',
         verbose_name='Нормализованный номер телефона',
-        blank=True
+        blank=True,
+        db_index=True
     )
     flats = models.ManyToManyField(
         Flat,
-        related_name="flats",
         verbose_name='Квартиры в собственности',
+        related_name='owners'
     )

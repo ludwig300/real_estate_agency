@@ -17,7 +17,7 @@ def copy_fields(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('property', '0009_auto_20221112_2232'),
+        ('property', '0010_auto_20221117_2112'),
     ]
 
     operations = [
