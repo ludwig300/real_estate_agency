@@ -15,4 +15,14 @@ class Migration(migrations.Migration):
             name='text',
             field=models.TextField(verbose_name='Текст жалобы'),
         ),
+        migrations.RenameField(
+            model_name='owner',
+            old_name='owners_phonenumber',
+            new_name='phonenumber',
+        ),
+        migrations.RenameField(
+            model_name='owner',
+            old_name='owner_pure_phone',
+            new_name='pure_phone',
+        ),
     ]
