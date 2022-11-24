@@ -3,13 +3,8 @@ from django.db import migrations
 
 def compare_year(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
-    for building in Flat.objects.all():
-        if building.construction_year >= 2015:
-            flag = True
-        else:
-            flag = False
-
-        building.new_building = flag
+    for building in Flat.objects.all().iterator():
+        building.new_building = building.construction_year >= 2015
         building.save()
 
 
