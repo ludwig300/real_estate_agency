@@ -1,11 +1,10 @@
-from django.db import migrations
+from django.db import migrations, models
 
 
 def compare_year(apps, schema_editor):
-    Flat = apps.get_model('property', 'Flat')
-    for building in Flat.objects.all().iterator():
-        building.new_building = building.construction_year >= 2015
-        building.save()
+    apps.get_model('property', 'Flat').objects.update(
+        new_building=models.F('construction_year') >= 2015
+    )
 
 
 class Migration(migrations.Migration):
