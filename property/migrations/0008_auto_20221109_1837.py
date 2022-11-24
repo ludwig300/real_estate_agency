@@ -7,7 +7,7 @@ import phonenumbers
 
 def get_owner_pure_phone(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
-    for building in Flat.objects.all():
+    for building in Flat.objects.all().iterator():
         building.owners_phonenumber
         number_parse = phonenumbers.parse(building.owners_phonenumber, 'RU')
         if phonenumbers.is_valid_number(number_parse):
