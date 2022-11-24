@@ -90,7 +90,7 @@ class Complaint(models.Model):
         null=True,
         related_name='flats'
     )
-    text = models.TextField('Текст жалобы', max_length=200)
+    text = models.TextField('Текст жалобы')
 
 
 class Owner(models.Model):
