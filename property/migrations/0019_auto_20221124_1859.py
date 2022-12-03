@@ -25,4 +25,9 @@ class Migration(migrations.Migration):
             old_name='owner_pure_phone',
             new_name='pure_phone',
         ),
+        migrations.RenameField(
+            model_name='owner',
+            old_name='owner',
+            new_name='name',
+        )
     ]
